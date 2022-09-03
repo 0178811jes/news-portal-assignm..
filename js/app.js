@@ -8,11 +8,11 @@ const loadNews = async() => {
 const displyNews = users =>{
     const newsContainer = document.getElementById('news-container');
     users.forEach(news_category => {
-        console.log(news_category)
+       
         const newsDiv =document.createElement('div');
         newsDiv.classList.add('user')
         newsDiv.innerHTML =`
-            <p>${news_category.category_name}</p>
+            <p onclick="categoryNews('${news_category.category_id}')">${news_category.category_name}</p>
             
         `;
         newsContainer.appendChild(newsDiv);
@@ -20,22 +20,34 @@ const displyNews = users =>{
     
         
 }
-
-// document.getElementById('news-container').addEventListener('click', function(){
-//     const inputField = document.getElementById('cetegory-field');
-//     const inputSearch = inputField.value;
-//     inputField.value = '';
-//     console.log(inputSearch)
-// })
-
-
-
-const cetegoryId = async() => {
-    const urlId =`https://openapi.programming-hero.com/api/news/category/01`
+const categoryNews = async(id) =>{
+    const urlId =`https://openapi.programming-hero.com/api/news/category/${id}`
     const res = await fetch(urlId);
     const data = await res.json();
-    console.log(data)
+    cardDetail(data.data);
 }
-cetegoryId();
+const cardDetail = cards=> {
+    const cardDiv =document.getElementById('card-div');
+    if(cards.length===0){
+        alert ('not found');
+    }
+    else{
+        cards.forEach(card => {
+            console.log(card)
+            const cardbox =document.createElement('div');
+            // cardbox.classList.add('col-md-4');
+            cardbox.innerHTML= `
+                <p> ${card.title}</p>
+            `;
+            cardDiv.appendChild(cardbox);
+        })
+    }
+   
+}
 
-// loadNews();
+
+
+
+
+
+loadNews();
