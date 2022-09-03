@@ -8,7 +8,6 @@ const loadNews = async() => {
 const displyNews = users =>{
     const newsContainer = document.getElementById('news-container');
     users.forEach(news_category => {
-       
         const newsDiv =document.createElement('div');
         newsDiv.classList.add('user')
         newsDiv.innerHTML =`
@@ -35,9 +34,23 @@ const cardDetail = cards=> {
         cards.forEach(card => {
             console.log(card)
             const cardbox =document.createElement('div');
-            // cardbox.classList.add('col-md-4');
+            cardbox.classList.add('col');
             cardbox.innerHTML= `
-                <p> ${card.title}</p>
+               
+                  <img src="${card.thumbnail_url
+                  }" class="img-fluid rounded-start" alt="...">
+               
+                <div>
+                  <div class="card-body">
+                    <h5 class="card-title"> ${card.title}</h5>
+
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    <p${card.author.name}  views:${card.tota}</p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <button></button>
+
+                  </div>
+                </div>
             `;
             cardDiv.appendChild(cardbox);
         })
