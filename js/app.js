@@ -36,21 +36,22 @@ const cardDetail = cards=> {
             const cardbox =document.createElement('div');
             cardbox.classList.add('col');
             cardbox.innerHTML= `
-               
-                  <img src="${card.thumbnail_url
-                  }" class="img-fluid rounded-start" alt="...">
-               
-                <div>
-                  <div class="card-body">
-                    <h5 class="card-title"> ${card.title}</h5>
-
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <p${card.author.name}  views:${card.tota}</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    <button></button>
-
-                  </div>
+            <div class="card">
+                <img src="${card.thumbnail_url
+                }" class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title"> ${card.title}</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>    
+            <div class="d-flex justify-content-around rounded-5">
+                <img class="author-img" src="${card.image_url}"</img>
+                <p>${card.author.name}</p>
+                <p> views:${card.total_view}</p>
+                <button type="button" class="btn btn-info h-50">Details</button>
                 </div>
+
+            </div>
+            
             `;
             cardDiv.appendChild(cardbox);
         })
