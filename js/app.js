@@ -27,6 +27,7 @@ const categoryNews = async(id) =>{
 }
 const cardDetail = cards=> {
     const cardDiv =document.getElementById('card-div');
+    cardDiv.textContent="";
     if(cards.length===0){
         alert ('not found');
     }
@@ -36,18 +37,18 @@ const cardDetail = cards=> {
             const cardbox =document.createElement('div');
             cardbox.classList.add('col');
             cardbox.innerHTML= `
-            <div class="card">
+            <div class="card mb-2">
                 <img src="${card.thumbnail_url
                 }" class="card-img-top" alt="...">
                 <div class="card-body">
                 <h5 class="card-title"> ${card.title}</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text">${card.details.length > 50 ? card.details.slice(0,50) + '...': card.details}</p>
             </div>    
-            <div class="d-flex justify-content-around rounded-5">
+            <div class="d-flex justify-content-around g-2">
                 <img class="author-img" src="${card.image_url}"</img>
                 <p>${card.author.name}</p>
                 <p> views:${card.total_view}</p>
-                <button type="button" class="btn btn-info h-50">Details</button>
+                <button onclick="" type="button" class="btn btn-info h-50">Details</button>
                 </div>
 
             </div>
