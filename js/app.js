@@ -4,9 +4,11 @@ const loadNews = async() => {
     const data = await res.json();
     displyNews(data.data.news_category);
 }
+ 
 
 const displyNews = users =>{
     const newsContainer = document.getElementById('news-container');
+   
     users.forEach(news_category => {
         const newsDiv =document.createElement('div');
         newsDiv.classList.add('user')
@@ -16,24 +18,28 @@ const displyNews = users =>{
         `;
         newsContainer.appendChild(newsDiv);
     })
-    
-        
+ 
 }
 const categoryNews = async(id) =>{
     const urlId =`https://openapi.programming-hero.com/api/news/category/${id}`
     const res = await fetch(urlId);
     const data = await res.json();
     cardDetail(data.data);
+
 }
+
+ 
+
 const cardDetail = cards=> {
     const cardDiv =document.getElementById('card-div');
     cardDiv.textContent="";
+   
     if(cards.length===0){
         alert ('not found');
     }
     else{
         cards.forEach(card => {
-            console.log(card)
+           
             const cardbox =document.createElement('div');
             cardbox.classList.add('col');
             cardbox.innerHTML= `
@@ -48,17 +54,62 @@ const cardDetail = cards=> {
                 <img class="author-img" src="${card.image_url}"</img>
                 <p>${card.author.name}</p>
                 <p> views:${card.total_view}</p>
-                <button onclick="" type="button" class="btn btn-info h-50">Details</button>
+                <button onclick="openModal('${card._id}')" type="button" class="btn btn-info h-50" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
                 </div>
 
             </div>
             
+            
             `;
+
             cardDiv.appendChild(cardbox);
+            //start loader//
+            toggleSpinner(true);
+
         })
+        
+   
+        toggleSpinner(false);
     }
    
 }
+const toggleSpinner = isLoading =>{
+    const loaderSection =document.getElementById('loader');
+    if(isLoading){
+        loaderSection.classList.remove('d-none')
+    }
+    else{
+        loaderSection.classList.add('d-none');
+    }
+    
+}
+
+const openModal = async(_id) =>{
+    const Url =`https://openapi.programming-hero.com/api/news/${_id}`
+    const res =await fetch(Url);
+    const data = await res.json();
+    displayCardDetail(data.data);
+
+ }
+const displayCardDetail = (cards,array) =>{
+    console.log(cards)
+    const modalDiv =document.getElementById('"modal-div');
+
+    cards.forEach(card =>{
+        const modalBox =document.createElement('div');
+        modalBox.innerHTML= `
+        <h5 class="card-title"> ${card.title}</h5>
+        `;
+        // modalDiv.appendChild(modalBox);
+    })
+
+    
+   
+}
+
+
+
+
 
 
 
