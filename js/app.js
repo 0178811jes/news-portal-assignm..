@@ -96,9 +96,10 @@ const displayCardDetail = (cards,array) =>{
     const modalDiv =document.getElementById('"modal-div');
 
     cards.forEach(card =>{
+        console.log(card)
         const modalBox =document.createElement('div');
         modalBox.innerHTML= `
-        <h5 class="card-title"> ${card.title}</h5>
+        <p>${card._id}</p>
         `;
         // modalDiv.appendChild(modalBox);
     })
